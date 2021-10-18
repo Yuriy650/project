@@ -1,0 +1,7 @@
+<div class="pages-container">
+  <div class="pages-container__body" >
+    <div class="pages-container__buttons" *ngFor="let i of pageNumbers">
+    <button class="pages-container__btn" value="{{i}}" (click)="getCurrentPageNumber($event)">{{i}}</button>
+    </div>
+  </div>
+</div>

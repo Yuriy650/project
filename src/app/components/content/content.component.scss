@@ -1,0 +1,76 @@
+.container{
+  &__body{
+    margin-right: 3rem;
+    margin-left: 3rem;
+  }
+  &__table{
+    width: 100%;
+    td{
+      text-align: center;
+    }
+    th{
+      font-weight: 600;
+      font-size: 1.2rem;
+      color: #ab5428;
+      padding-bottom: 1rem;
+      text-align: center;
+      width: 12rem;
+    }
+
+    td{
+      padding-bottom: 1rem;
+      font-weight: 500;
+      color: #ab5458;
+
+    }
+  }
+  &__table-name{
+    text-align: center;
+    border: none;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #ab5428;
+    outline: none;
+  }
+  &__btn{
+    background-color: #fff;
+    border: none;
+    text-align: center;
+    color: #ab5428;
+    font-weight: 600;
+    font-size: 1.2rem;
+    cursor: pointer;
+    margin: 0;
+  }
+  @media (max-width: 1200px){
+    th{
+      width: 8rem;
+      font-size: 0.8rem
+    }
+    &__btn{
+      font-size: 0.8rem
+    }
+    &__body{
+      margin-left: 1.5rem;
+      margin-right: 1.5rem
+    }
+  }
+  @media (max-width: 992px){
+    th{
+      width: 5rem;
+      font-size: 0.6rem
+    }
+    &__btn{
+      font-size: 0.6rem
+    }
+    &__body{
+      margin-left: 0.5rem;
+      margin-right: 0.5rem
+    }
+  }
+  @media (max-width: 767px){
+    th{
+      max-width: none;
+    }
+  }
+}

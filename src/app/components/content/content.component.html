@@ -1,0 +1,26 @@
+<div class="container">
+  <div class="container__body">
+    <table class="container__table" fxLayout="column" fxLayoutAlign="space-between center">
+      <tr>
+        <th>
+          <button class="container__btn" (click)="sortDownById()">
+            <mat-icon>arrow_downward</mat-icon>
+          </button>
+          <button class="container__btn" (click)="sortUpById()">
+            <mat-icon>arrow_upward</mat-icon>
+          </button>
+        </th>
+        <th>Image</th>
+        <th>Name</th>
+        <th>Gender</th>
+        <th>Status</th>
+        <th>Species</th>
+      </tr>
+      <app-character *ngFor="let character of characters$ | async" [character]="character" fxLayout="column"
+                     fxLayoutAlign="space-between center"></app-character>
+    </table>
+    <app-pages></app-pages>
+    <app-footer></app-footer>
+  </div>
+</div>
+

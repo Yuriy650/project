@@ -1,0 +1,33 @@
+
+.navbar-container {
+  &__body {
+    margin: 0 3rem 1rem 3rem;
+  }
+&__form{
+  margin: 1rem 0.5rem
+}
+  a {
+    text-decoration: none;
+    color: #f9f9f9;
+  }
+  a:active{
+    color: #ab5458;
+  }
+  .mat-form-field{
+    margin-right: 0.5rem;
+
+  }
+  .mat-error {
+    color: #f9f9f9;
+  }
+  &__btn-submit{
+    color: #f9f9f9;
+    margin-right: 0.5rem;
+    margin-left: 1rem;
+    padding: 0.3rem;
+  }
+  &__btn-reset{
+    padding: 0.3rem;
+  }
+
+}

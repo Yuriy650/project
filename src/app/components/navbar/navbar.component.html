@@ -1,0 +1,47 @@
+<div class="navbar-container">
+  <div class="navbar-container__body" style="background-color: #ab5158" fxLayout="row" fxLayoutAlign="center center" fxFlex>
+   <form class="navbar-container__form" [formGroup]="form" (submit)="searchByAllFields($event)" >
+    <mat-form-field appearance="outline" >
+      <mat-label>Search by name</mat-label>
+          <input matInput placeholder="Name" value="" formControlName="name">
+    </mat-form-field>
+     <mat-form-field appearance="outline">
+      <mat-label>Gender</mat-label>
+      <mat-select formControlName="gender" >
+        <mat-option>&#45;&#45;</mat-option>
+        <mat-option value="male">Male</mat-option>
+        <mat-option value="female">Female</mat-option>
+        <mat-option value="unknown">unknown</mat-option>
+      </mat-select>
+      <mat-error *ngIf="genderControl.hasError('required')">Please choose gender</mat-error>
+     </mat-form-field>
+     <mat-form-field appearance="outline">
+      <mat-label>Status</mat-label>
+      <mat-select formControlName="status" >
+        <mat-option>&#45;&#45;</mat-option>
+        <mat-option value="alive">Alive</mat-option>
+        <mat-option value="dead">Dead</mat-option>
+        <mat-option value="unknown">unknown</mat-option>
+      </mat-select>
+      <mat-error *ngIf="statusControl.hasError('required')">Please choose status</mat-error>
+     </mat-form-field>
+     <mat-form-field appearance="outline">
+      <mat-label>Species</mat-label>
+      <mat-select formControlName="species" >
+        <mat-option>&#45;&#45;</mat-option>
+        <mat-option value="alive">Alien</mat-option>
+        <mat-option value="dead">Human</mat-option>
+        <mat-option value="poopybutthole">Poopybutthole</mat-option>
+        <mat-option value="humanoid">Humanoid</mat-option>
+        <mat-option value="mythological creature">Mythological Creature</mat-option>
+        <mat-option value="unknown">unknown</mat-option>
+      </mat-select>
+     <mat-error *ngIf="speciesControl.hasError('required')">Please choose species</mat-error>
+     </mat-form-field>
+      <button mat-stroked-button type="submit" class="navbar-container__btn-submit">Submit</button>
+      <button mat-stroked-button type="button" color="primary" class="navbar-container__btn-reset">
+        <a class="navbar-container__btn-back" [routerLink]="['/']" (click)="resetForm()">Reset</a>
+      </button>
+    </form>
+  </div>
+</div>
