@@ -8,7 +8,7 @@ import {
   SortUpCharactersById
 } from "../actions/characters.action";
 import {tap} from "rxjs/operators";
-import {environment} from "../../environments/environment";
+import {environment} from "../../environments/environment.prod";
 
 export class CharactersStateModel {
   characters: Character[];
