@@ -24,6 +24,13 @@ import { FooterComponent } from './components/footer/footer.component';
 import { PagesComponent } from './components/pages/pages.component';
 import {MatSelectModule} from "@angular/material/select";
 import {MatButtonModule} from "@angular/material/button";
+import {CharacterModule} from "./components/character/character.module";
+import {PagesModule} from "./components/pages/pages.module";
+import {CommonModule} from "@angular/common";
+import {ContentModule} from "./components/content/content.module";
+import {FooterModule} from "./components/footer/footer.module";
+import {SharedModule} from "./shared/shared.module";
+import {NavbarModule} from "./components/navbar/navbar.module";
 
 
 
@@ -31,34 +38,29 @@ import {MatButtonModule} from "@angular/material/button";
 @NgModule({
   declarations: [
     AppComponent,
-    ContentComponent,
-    CharacterComponent,
-    NavbarComponent,
-    FooterComponent,
-    PagesComponent
   ],
   imports: [
     BrowserModule,
+    ContentModule,
+    CharacterModule,
+    FooterModule,
+    PagesModule,
+    NavbarModule,
+    MatIconModule,
+    SharedModule,
+    CommonModule,
     NgxsModule.forRoot([
       CharactersState
     ]),
     NgxsReduxDevtoolsPluginModule.forRoot(),
     NgxsLoggerPluginModule.forRoot(),
-    AppRoutingModule,
-    HttpClientModule,
     BrowserAnimationsModule,
-    MatCardModule,
-    FlexLayoutModule,
-    MatTableModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatIconModule,
-MatFormFieldModule,
-    MatInputModule,
-    MatSelectModule,
-    MatButtonModule
   ],
   providers: [],
+  exports: [
+
+
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

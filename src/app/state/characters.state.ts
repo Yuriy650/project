@@ -8,6 +8,7 @@ import {
   SortUpCharactersById
 } from "../actions/characters.action";
 import {tap} from "rxjs/operators";
+import {environment} from "../../environments/environment";
 
 export class CharactersStateModel {
   characters: Character[];
@@ -72,7 +73,7 @@ export class CharactersState {
       .pipe(
         tap(data => {
           const state = getState();
-          const countPerPage = 4;
+          const countPerPage = environment.countPerPage;
           const lastCharIdx = payload*countPerPage;
           const firstCharIdx = lastCharIdx - countPerPage;
           // @ts-ignore
@@ -117,7 +118,7 @@ getCurrentPage({getState, setState}: StateContext<CharactersStateModel>, {payloa
     return this.fetchService.fetchNextPageCharacters(payload.link).pipe(
       tap(data=>{
         const state = getState();
-        const countPerPage = 4;
+        const countPerPage = environment.countPerPage;
         const lastCharIdx = payload.page*countPerPage;
         const firstCharIdx = lastCharIdx - countPerPage;
         // @ts-ignore
@@ -138,7 +139,7 @@ getCurrentPage({getState, setState}: StateContext<CharactersStateModel>, {payloa
    return this.fetchService.fetchNextPageCharacters(payload).pipe(
       tap(data=>{
         const state = getState();
-        const countPerPage = 4;
+        const countPerPage = environment.countPerPage;
         const lastCharIdx = state.currentPage*countPerPage;
         const firstCharIdx = lastCharIdx - countPerPage;
         // @ts-ignore
