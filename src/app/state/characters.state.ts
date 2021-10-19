@@ -9,6 +9,7 @@ import {
 } from "../actions/characters.action";
 import {tap} from "rxjs/operators";
 import {environment} from "../../environments/environment.prod";
+import {PaginationService} from "../services/pagination.service";
 
 export class CharactersStateModel {
   characters: Character[];
@@ -34,7 +35,8 @@ export class CharactersStateModel {
   }
 })
 export class CharactersState {
-  constructor(public fetchService: FetchCharactersService) {
+  constructor(public fetchService: FetchCharactersService,
+              public paginationService: PaginationService) {
   }
 
   @Selector()
@@ -73,13 +75,9 @@ export class CharactersState {
       .pipe(
         tap(data => {
           const state = getState();
-          const countPerPage = environment.countPerPage;
-          const lastCharIdx = payload*countPerPage;
-          const firstCharIdx = lastCharIdx - countPerPage;
           // @ts-ignore
           const {info, results} = data;
-          const charactersInCurrentPage = results.slice(firstCharIdx, lastCharIdx)
-          console.log(results);
+          const charactersInCurrentPage = this.paginationService.getPagination(results, payload)
           setState({
             ...state,
             characters: charactersInCurrentPage,
@@ -99,7 +97,6 @@ export class CharactersState {
           const {name, gender, status, species} = payload;
 // @ts-ignore
           const {info, results} = data
-          console.log(gender)
           let searchedCharacters = results
             .filter((item: Character) => (item.name.toLowerCase().includes(name.toLowerCase()) || name === ''))
             .filter((item: Character) => (item.gender.toLowerCase() === gender.toLowerCase()) || gender === '')
@@ -113,40 +110,31 @@ export class CharactersState {
     )
 
   }
-@Action(GetCurrentPageCharacters)
-getCurrentPage({getState, setState}: StateContext<CharactersStateModel>, {payload}: GetCurrentPageCharacters){
+
+  @Action(GetCurrentPageCharacters)
+  getCurrentPage({getState, setState}: StateContext<CharactersStateModel>, {payload}: GetCurrentPageCharacters) {
     return this.fetchService.fetchNextPageCharacters(payload.link).pipe(
-      tap(data=>{
+      tap(data => {
         const state = getState();
-        const countPerPage = environment.countPerPage;
-        const lastCharIdx = payload.page*countPerPage;
-        const firstCharIdx = lastCharIdx - countPerPage;
         // @ts-ignore
         const {info, results} = data;
-        const charactersInCurrentPage = results.slice(firstCharIdx, lastCharIdx)
-
+        const charactersInCurrentPage = this.paginationService.getPagination(results, payload.page)
         setState({
           ...state,
           characters: charactersInCurrentPage,
         })
       })
     )
-}
-
+  }
 
   @Action(GetNextPageCharacters)
   getNextCharacters({getState, setState}: StateContext<CharactersStateModel>, {payload}: GetNextPageCharacters) {
-   return this.fetchService.fetchNextPageCharacters(payload).pipe(
-      tap(data=>{
+    return this.fetchService.fetchNextPageCharacters(payload).pipe(
+      tap(data => {
         const state = getState();
-        const countPerPage = environment.countPerPage;
-        const lastCharIdx = state.currentPage*countPerPage;
-        const firstCharIdx = lastCharIdx - countPerPage;
         // @ts-ignore
         const {info, results} = data;
-        const charactersInCurrentPage = results.slice(firstCharIdx, lastCharIdx)
-        // @ts-ignore
-        console.log(results);
+        const charactersInCurrentPage = this.paginationService.getPagination(results, state.currentPage)
         setState({
           ...state,
           characters: charactersInCurrentPage,
@@ -175,6 +163,4 @@ getCurrentPage({getState, setState}: StateContext<CharactersStateModel>, {payloa
       characters: [...sortedCharacters]
     })
   }
-
-
 }
